@@ -5,24 +5,17 @@ Google APIs Client Library for PHP
 The Google API Client Library enables you to work with Google APIs such as Buzz, Moderator, Tasks, or Latitude on your server.
 
 This is a forked version from:
-* http://code.google.com/p/google-api-php-client/
-
-Current version is hosted here:
-* https://github.com/evert/google-api-php-client
+* https://github.com/evert/google-api-php-client based on http://code.google.com/p/google-api-php-client/
 
 ## Fork information
 
 This project was forked to modernize the google api codebase a little bit.
 The following changes have been made:
 
-* Gotted rid of all require() statements. An autoloader is now required
-* Renamed all classes. Everything is now in a GoogleApi namespace.
-* Added composer package information (todo)
-* Gotted rid of automatically executing code.
+* Google Analytics classes moved to separated files and reformated code
 
 The existing documentation applies, just keep in mind that instead of class
 like `apiHttpRequest`, you must now use `\GoogleApi\Io\HttpRequest`.
-
 
 
 ## Requirements:
@@ -49,20 +42,3 @@ Subscribe to project updates in your feed reader:
 
 Supported sample applications:
 * http://code.google.com/p/google-api-php-client/wiki/Samples
-
-## Basic Example
-
-```
-<?php
-include 'vendor/.composer/autoload.php';
-
-$client = new \GoogleApi\Client();
-$service = new \GoogleApi\Books\Service($client);
-
-$optParams = array('filter' => 'free-ebooks');
-$results = $service->volumes->listVolumes('Henry David Thoreau', $optParams);
-
-foreach ($results['items'] as $item) {
-  print($item['volumeInfo']['title'] . '<br>');
-}
-```
