@@ -55,7 +55,7 @@ class OAuth2 extends Auth {
    */
   public function __construct() {
     $apiConfig = Config::getAll();
-    
+
     if (! empty($apiConfig['developer_key'])) {
       $this->developerKey = $apiConfig['developer_key'];
     }
@@ -71,7 +71,7 @@ class OAuth2 extends Auth {
     if (! empty($apiConfig['oauth2_redirect_uri'])) {
       $this->redirectUri = $apiConfig['oauth2_redirect_uri'];
     }
-    
+
     if (! empty($apiConfig['oauth2_access_type'])) {
       $this->accessType = $apiConfig['oauth2_access_type'];
     }
@@ -113,7 +113,7 @@ class OAuth2 extends Auth {
 
     $authUrl = $this->createAuthUrl($service['scope']);
     header('Location: ' . $authUrl);
-  } 
+  }
 
   /**
    * Create a URL to obtain user authorization.
@@ -423,5 +423,20 @@ class OAuth2 extends Auth {
 
     // All good.
     return new LoginTicket($envelope, $payload);
+  }
+
+  /**
+   * Returns if the access_token is expired.
+   * @return bool Returns True if the access_token is expired.
+   */
+  public function isAccessTokenExpired()
+  {
+    if (!$this->token || !isset($this->token['created'])) {
+      return true;
+    }
+    // If the token is set to expire in the next 30 seconds.
+    $expired = ($this->token['created']
+        + ($this->token['expires_in'] - 30)) < time();
+    return $expired;
   }
 }

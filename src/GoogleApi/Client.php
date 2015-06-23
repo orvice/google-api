@@ -336,7 +336,12 @@ class Client {
    */
   public function isAccessTokenExpired()
   {
-    return $this->getAuth()->isAccessTokenExpired();
+    if($client->getAccessToken()['created']+3600-30 < time()){
+      return true;
+    }else {
+      return false;
+    }
+    //  $token = self::$auth->getAccessToken();
   }
 
   /**
