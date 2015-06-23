@@ -217,7 +217,7 @@ class Client {
     Config::set('oauth2_client_id', $clientId);
     self::$auth->clientId = $clientId;
   }
-  
+
   /**
    * Set the OAuth 2.0 Client Secret.
    * @param string $clientSecret
@@ -329,5 +329,23 @@ class Client {
   public function getCache() {
     return Client::$cache;
   }
-}
 
+  /**
+   * Returns if the access_token is expired.
+   * @return bool Returns True if the access_token is expired.
+   */
+  public function isAccessTokenExpired()
+  {
+    return $this->getAuth()->isAccessTokenExpired();
+  }
+
+  /**
+   * Get the OAuth 2.0 refresh token.
+   * @return string $refreshToken refresh token or null if not available
+   */
+  public function getRefreshToken()
+  {
+    return $this->getAuth()->getRefreshToken();
+  }
+
+}
