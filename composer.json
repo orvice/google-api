@@ -1,5 +1,5 @@
 {
-    "name": "sorien/google-api",
+    "name": "orvice/google-api",
     "type": "library",
     "description": "Google API library for PHP",
     "keywords": ["google","gdata"],
@@ -13,6 +13,10 @@
         {
             "name": "Stanislav Turza",
             "email": "stanislav.turza@gmail.com"
+        },
+        {
+          "name": "orvice",
+          "email": "orvice@gmail.com"
         }
     ],
     "require": {
